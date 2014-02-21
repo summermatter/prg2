@@ -1,3 +1,5 @@
+import com.sun.accessibility.internal.resources.accessibility;
+
 /**
  * Created by tiesums on 21.02.14.
  */
@@ -71,6 +73,31 @@ public class LinkedList<T> {
         }
     }
 
+    public int size(){
+        ListNode<T> actualNode = head;
+        int i = 0;
+
+        while (actualNode != null){
+            i++;
+            actualNode = actualNode.getNext();
+        }
+        return i;
+    }
+
+    public double getSaldo(){
+        ListNode<T> actualNode = head;
+        Konto k;
+        double saldo = 0;
+
+        while (actualNode != null){
+            k = actualNode.getKonto();
+            saldo += k.getSaldo();
+            actualNode = actualNode.getNext();
+        }
+
+        return saldo;
+    }
+
     // Test
     public static void main(String[] args){
         LinkedList<Konto> list = new LinkedList<Konto>();
@@ -79,4 +106,6 @@ public class LinkedList<T> {
         list.insert(new Spar(200.0, 2.0, 50));
         list.print();
     }
+
+
 }

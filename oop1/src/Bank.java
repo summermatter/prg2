@@ -5,39 +5,45 @@ import java.util.ArrayList;
  */
 public class Bank {
     private String name;
-    private ArrayList<Konto> accountList;
+    //private ArrayList<Konto> accountList;
+    private LinkedList<Konto> accountList;
 
     public Bank(String name){
         this.name = name;
-        this.accountList = new ArrayList<Konto>(0);
+        //this.accountList = new ArrayList<Konto>(0);
+        this.accountList = new LinkedList<Konto>();
     }
 
     public void openKonto(double saldo, double rate){
-        accountList.add(new Konto(saldo, rate));
+        //accountList.add(new Konto(saldo, rate));
+        accountList.insert(new Konto(saldo,rate));
     }
 
     public void openSpar(double saldo, double rate, double maxOut){
-        accountList.add(new Spar(saldo, rate, maxOut));
+        //accountList.add(new Spar(saldo, rate, maxOut));
+        accountList.insert(new Spar(saldo,rate, maxOut));
     }
 
     public int noOfAccounts(){
+        //int no = accountList.size();
         int no = accountList.size();
-
         return no;
     }
 
     public void printAccounts(){
-        for(int i = 0;i < noOfAccounts();i++) {
+        /*for(int i = 0;i < noOfAccounts();i++) {
             System.out.println(accountList.get(i));
-        }
+        }*/
+        accountList.print();
 
     }
 
     public void printFund(){
         double printSaldo = 0;
-        for(int i = 0;i < noOfAccounts();i++) {
+        /*for(int i = 0;i < noOfAccounts();i++) {
             printSaldo += accountList.get(i).getSaldo();
-        }
+        }*/
+        printSaldo = accountList.getSaldo();
         System.out.println(printSaldo);
     }
 
