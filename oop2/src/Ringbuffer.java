@@ -11,19 +11,8 @@ public class Ringbuffer {
     public void enqueue(String x) {
         // Fügt x am Ende in die Warteschlange ein,
         // falls die Warteschlange nicht voll ist;
-        /*if(isEmpty()){
-            queue[tail] = x;
-        } */
-
-        /*if (!isFull()) {
-            queue[tail] = x;
-            if (!isFull()) {
-                tail++;
-            }
-        }*/
-
         if (!isFull()) {
-            queue[tail%size] = x;
+            queue[tail % size] = x;
             tail++;
         }
     }
@@ -31,18 +20,6 @@ public class Ringbuffer {
     public void dequeue() {
         // Entfernt das erste Element aus der Warteschlange,
         // falls die Warteschlange nicht leer ist;
-        /*if (!isEmpty()) {
-            for (int i = 0; i < tail; i++) {
-                queue[i] = queue[i + 1];
-            }
-            //ToDo: if is full tail nicht -- machen?
-
-            queue[tail] = null;
-            //if (isFull()) {
-                tail--;
-            //}
-        }*/
-
         if (!isEmpty()) {
             queue[head] = null;
             head++;
@@ -52,11 +29,15 @@ public class Ringbuffer {
 
     public boolean isEmpty() {
         //liefert true genau dann, wenn die Warteschlange kein Element enthält
-        Boolean isEmpty = true;
-        for (int i = 0; i < queue.length; i++) {
+        Boolean isEmpty = false;
+        /*for (int i = 0; i < queue.length; i++) {
             if (!(queue[i] == null)) {
                 isEmpty = false;
             }
+        }*/
+
+        if (tail - head == 0) {
+            isEmpty = true;
         }
 
         return isEmpty;
@@ -64,11 +45,14 @@ public class Ringbuffer {
 
     public boolean isFull() {
         //liefert true genau dann, wenn die Warteschlange voll ist
-        Boolean isFull = true;
-        for (int i = 0; i < queue.length; i++) {
+        Boolean isFull = false;
+        /*for (int i = 0; i < queue.length; i++) {
             if (queue[i] == null) {
                 isFull = false;
             }
+        }*/
+        if (tail - head == 5) {
+            isFull = true;
         }
 
         return isFull;
