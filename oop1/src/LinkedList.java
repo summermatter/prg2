@@ -34,11 +34,7 @@ public class LinkedList<T> {
         while ((actualNode != null) && !k.equals(actualNode.getKonto())){
             actualNode = actualNode.getNext();
         }
-        if (actualNode == null){
-            return false;
-        } else {
-            return true;
-        }
+        return actualNode != null;
     }
 
     /**
