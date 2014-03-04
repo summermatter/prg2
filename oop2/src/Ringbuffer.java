@@ -1,5 +1,5 @@
 /**
- * Created by ShawnyBunny on 24/02/14.
+ * Created by Shawn Summermatter on 24/02/14.
  */
 public class Ringbuffer {
 
@@ -7,45 +7,26 @@ public class Ringbuffer {
     private String[] queue = new String[size];
     private int head = 0;
     private int tail = 0;
+    private int no = 0;
 
     public void enqueue(String x) {
         // Fügt x am Ende in die Warteschlange ein,
         // falls die Warteschlange nicht voll ist;
-        /*if(isEmpty()){
-            queue[tail] = x;
-        } */
-
-        /*if (!isFull()) {
-            queue[tail] = x;
-            if (!isFull()) {
-                tail++;
-            }
-        }*/
 
         if (!isFull()) {
-            queue[tail%size] = x;
+            queue[tail % size] = x;
             tail++;
+            no++;
         }
     }
 
     public void dequeue() {
         // Entfernt das erste Element aus der Warteschlange,
-        // falls die Warteschlange nicht leer ist;
-        /*if (!isEmpty()) {
-            for (int i = 0; i < tail; i++) {
-                queue[i] = queue[i + 1];
-            }
-            //ToDo: if is full tail nicht -- machen?
-
-            queue[tail] = null;
-            //if (isFull()) {
-                tail--;
-            //}
-        }*/
 
         if (!isEmpty()) {
-            queue[head] = null;
+            queue[head % size] = null;
             head++;
+            no--;
         }
 
     }
@@ -59,6 +40,8 @@ public class Ringbuffer {
             }
         }
 
+        //isEmpty = no == 0;
+
         return isEmpty;
     }
 
@@ -70,6 +53,8 @@ public class Ringbuffer {
                 isFull = false;
             }
         }
+
+        //isFull = no > 0;
 
         return isFull;
     }
